@@ -1,12 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('ST1-4595427U') {
             steps {
-                git(
-                    url: 'https://github.com/chinteck847/rp-dv1c03-repo.git',
-                    branch: 'main'
-                )
+                echo 'ST1-4595427U: Setup Release Environment Completed.'
             }
         }
     }
