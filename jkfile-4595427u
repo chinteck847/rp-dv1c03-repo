@@ -6,5 +6,39 @@ pipeline {
                 echo 'ST1-4595427U: Setup Release Environment Completed.'
             }
         }
+        stage('ST2-4595427U') {
+            steps {
+                echo 'ST2-4595427U: Test'
+            }
+        }
+        stage('ST3-Parallel-4595427U') {
+            parallel {
+                stage('ST3a-4595427U') {
+                    steps {
+                        echo 'Test 3a'
+                    }
+                }
+                stage('ST3b-4595427U') {
+                    steps {
+                        echo 'Test 3b'
+                    }
+                }
+            }
+        }
+        stage('ST4-4595427U') {
+            steps {
+                echo 'ST4-4595427U: Test'
+            }
+        }
+        stage('ST5-4595427U') {
+            steps {
+                echo 'ST5-4595427U: Test'
+            }
+        }
+        stage('ST6-4595427U') {
+            steps {
+                echo 'ST6-4595427U: Test'
+            }
+        }
     }
 }
