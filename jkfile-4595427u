@@ -15,7 +15,7 @@ pipeline {
                     def containerPort = '80'
 
                     def containerExists = sh (
-                        script: "docker ps -a --filter name=svr-4595427U --format '{{.Names}}'",
+                        script: "docker ps -a --filter name=svr-4595427u --format '{{.Names}}'",
                         returnStdout: true
                     ).trim()
 
