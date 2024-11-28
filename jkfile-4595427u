@@ -77,12 +77,13 @@ pipeline {
                     if (userInput == 'Abort') {
                         error("Pipeline has been aborted.")
                     }
+                    echo "ST5-4595427U : Approve to proceed to next phase"
                 }
             }
         }
         stage('ST6-4595427U') {
             steps {
-                echo 'ST6-4595427U: Test'
+                echo "ST6-4595427U : Ready for next phase"
             }
         }
     }
