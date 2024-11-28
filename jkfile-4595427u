@@ -66,7 +66,18 @@ pipeline {
         }
         stage('ST5-4595427U') {
             steps {
-                echo 'ST5-4595427U: Test'
+                script {
+                    def userInput = input(
+                        message: 'Hello 4595427U, permission to proceed to next phase?',
+                        parameters: [
+                            choice(name: 'Proceed?', choices: ['Proceed', 'Abort'], description: 'Proceed or Abort')
+                        ]
+                    )
+
+                    if (userInput == 'No') {
+                        error("Pipeline terminated due to rejection.")
+                    }
+                }
             }
         }
         stage('ST6-4595427U') {
