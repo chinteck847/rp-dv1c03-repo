@@ -34,7 +34,7 @@ pipeline {
                             --name ${containerName} \
                             -p ${hostPort}:${containerPort} \
                             ${imageName} \
-                            /bin/bash -c "echo 'ServerName localhost' >> /etc/apache2/apache2.conf && service apache2 start && apache2ctl -D FOREGROUND"
+                            /bin/bash -c "service apache2 start && apache2ctl -D FOREGROUND"
                     """
                 }
             }
