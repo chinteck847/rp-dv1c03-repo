@@ -74,8 +74,8 @@ pipeline {
                         ]
                     )
 
-                    if (userInput == 'No') {
-                        error("Pipeline terminated due to rejection.")
+                    if (userInput == 'Abort') {
+                        error("Pipeline has been aborted.")
                     }
                 }
             }
