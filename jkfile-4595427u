@@ -6,9 +6,37 @@ pipeline {
                 echo 'ST1-4595427U: Setup Release Environment Completed.'
             }
         }
-        stage('ST2-4595427U') {
+        stage('Run Docker Container') {
             steps {
-                echo 'ST2-4595427U: Test'
+                script {
+                    def containerName = 'svr-4595427U'
+                    def imageName = 'img-base-4595427U'
+                    def hostPort = '32900'
+                    def containerPort = '80'
+
+                    def containerExists = sh (
+                        script: "docker ps -a --filter name=svr-4595427U --format '{{.Names}}'",
+                        returnStdout: true
+                    ).trim()
+
+                    if (containerExists == containerName) {
+                        echo "Remove existing container..."
+                        sh "docker rm -f ${containerName}"
+                    } else {
+                        echo "No existing container named '${containerName}' found."
+                    }
+
+                    // Run the Docker container
+                    echo "Starting new container '${containerName}' using image '${imageName}'."
+                    sh """
+                        docker run -d \
+                            --restart always \
+                            --name ${containerName} \
+                            -p ${hostPort}:${containerPort} \
+                            ${imageName} \
+                            /bin/bash -c "echo 'ServerName localhost' >> /etc/apache2/apache2.conf && service apache2 start && apache2ctl -D FOREGROUND"
+                    """
+                }
             }
         }
         stage('ST3-Parallel-4595427U') {
