@@ -9,16 +9,20 @@ pipeline {
         stage('ST2-4595427U') {
             steps {
                 script {
+                    // Variable Declaration
                     def containerName = 'svr-4595427u'
                     def imageName = 'img-base-4595427u'
                     def hostPort = '32900'
                     def containerPort = '80'
 
+                    // Check if there is already an existing container with the name svr-4595427u
+                    // The following filters and formats to ensure we only get the name 'svr-4595427u'
                     def containerExists = sh (
                         script: "docker ps -a --filter name=svr-4595427u --format '{{.Names}}'",
                         returnStdout: true
                     ).trim()
-
+                    // if statement to verify if container exists
+                    // if it exists, remove the container forcefully
                     if (containerExists == containerName) {
                         echo "Remove existing container..."
                         sh "docker rm -f ${containerName}"
@@ -27,6 +31,7 @@ pipeline {
                     }
 
                     // Run the Docker container
+                    // Ensure the container always restarts and ensure apache2 is running in the foreground to prevent docker from closing the container
                     echo "Starting new container '${containerName}' using image '${imageName}'."
                     sh """
                         docker run -d \
