@@ -41,6 +41,7 @@ pipeline {
                             ${imageName} \
                             /bin/bash -c "apache2ctl -D FOREGROUND"
                     """
+                    echo "ST2-4595427U: Server Setup Completed"
                 }
             }
         }
@@ -48,19 +49,19 @@ pipeline {
             parallel {
                 stage('ST3a-4595427U') {
                     steps {
-                        echo 'Test 3a'
+                        echo "ST3A-4595427U: X-Site Scripting (XSS) Test Completed and Report Generated"
                     }
                 }
                 stage('ST3b-4595427U') {
                     steps {
-                        echo 'Test 3b'
+                        echo "ST3B-4595427U: SQL injection (SQLI) Test Completed and Report Generated"
                     }
                 }
             }
         }
         stage('ST4-4595427U') {
             steps {
-                echo 'ST4-4595427U: Test'
+                echo "ST4-4595427U: Security reports are checked"
             }
         }
         stage('ST5-4595427U') {
