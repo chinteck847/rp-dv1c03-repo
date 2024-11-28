@@ -6,7 +6,7 @@ pipeline {
                 echo 'ST1-4595427U: Setup Release Environment Completed.'
             }
         }
-        stage('Run Docker Container') {
+        stage('ST2-4595427U') {
             steps {
                 script {
                     def containerName = 'svr-4595427u'
